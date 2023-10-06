@@ -1,7 +1,12 @@
 #include <iostream>
 
+#include "Log/Log.h"
 #include "Game/Game.h"
 
 int main()
 {
-    Game::getInstance().run();    return EXIT_SUCCESS;}
+    Log::info("Starting game...");
+    Log::stopRaylibLogging();
+    Game::getInstance().run();
+    return EXIT_SUCCESS;
+}
