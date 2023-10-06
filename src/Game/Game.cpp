@@ -38,6 +38,10 @@ void Game::run()
 void Game::update()
 {
     this->handleInput();
+    for (auto &entity : this->entities)
+    {
+        entity->update();
+    }
 }
 
 void Game::draw()
@@ -45,9 +49,15 @@ void Game::draw()
     BeginDrawing();
 
     ClearBackground(RAYWHITE);
+
+    for (auto &entity : this->entities)
+    {
+        entity->draw();
+    }
+
     EndDrawing();
 }
 
 void Game::destroy()
 {
-    CloseWindow();}void Game::handleInput(){}
+    for (auto &entity : this->entities)    {        entity->destroy();        delete entity;    }    this->entities.clear();    CloseWindow();}void Game::handleInput(){}

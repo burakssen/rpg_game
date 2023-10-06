@@ -2,6 +2,7 @@
 
 #include <raylib.h>
 #include <vector>
+#include "../Entities/Entity.h"
 class Game
 {
 private:
@@ -16,4 +17,6 @@ public:
     void draw();
     void destroy();
     void handleInput();
+
+    std::vector<Entity *> entities;
 };
