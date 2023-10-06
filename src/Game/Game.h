@@ -2,7 +2,10 @@
 
 #include <raylib.h>
 #include <vector>
+
 #include "../Entities/Entity.h"
+#include "../Entities/Player/Player.h"
+
 class Game
 {
 private:

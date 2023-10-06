@@ -24,6 +24,10 @@ void Game::init()
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
     SetTargetFPS(60);
+
+    Player *player = new Player();
+
+    this->entities.emplace_back(player);
 }
 
 void Game::run()
@@ -60,4 +64,16 @@ void Game::draw()
 
 void Game::destroy()
 {
-    for (auto &entity : this->entities)    {        entity->destroy();        delete entity;    }    this->entities.clear();    CloseWindow();}void Game::handleInput(){}
+    for (auto &entity : this->entities)
+    {
+        entity->destroy();
+        delete entity;
+    }
+
+    this->entities.clear();
+    CloseWindow();
+}
+
+void Game::handleInput()
+{
+}
