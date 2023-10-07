@@ -54,8 +54,11 @@ void Player::init()
         .animation_speed = 0.5f,
         .frame_width = 120,
         .frame_height = 80,
-        .animation_type = AnimationType::ONCE,
-        .texture = TEXTURE_MANAGER.getTexture("player_roll")};
+        .texture = TEXTURE_MANAGER.getTexture("player_roll"),
+        .animation_type = AnimationType::ONCE
+    };
+
+    AnimationType animation_type = AnimationType::INFINITE;
 
     Animation idle_animation{
         .name = "idle",
