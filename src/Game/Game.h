@@ -5,6 +5,7 @@
 
 #include "../Entities/Entity.h"
 #include "../Entities/Player/Player.h"
+#include "../Entities/Tile/Tile.h"
 
 class Game
 {
@@ -21,5 +22,8 @@ public:
     void destroy();
     void handleInput();
 
+private:
     std::vector<Entity *> entities;
+    int width = 800;
+    int height = 450;
 };

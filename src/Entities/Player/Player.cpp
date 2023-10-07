@@ -35,6 +35,8 @@ void Player::init()
 {
     TransformComponent *transform = this->addComponent<TransformComponent>();
     AnimationComponent *animation = this->addComponent<AnimationComponent>();
+    VelocityComponent *velocity = this->addComponent<VelocityComponent>();
+    velocity->setVelocityDecay({0.25f, 0.25f});
 
     transform->setPosition({(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2});
     transform->setRotation(0);
@@ -78,18 +80,23 @@ void Player::init()
 void Player::destroy()
 {
     this->removeComponent<TransformComponent>();
-    this->removeComponent<SpriteComponent>();
+    this->removeComponent<AnimationComponent>();
+    this->removeComponent<VelocityComponent>();
 }
 
 void Player::handleInput()
 {
     AnimationComponent *animation = this->getComponent<AnimationComponent>();
     TransformComponent *transform = this->getComponent<TransformComponent>();
+    VelocityComponent *velocity = this->getComponent<VelocityComponent>();
 
     if (animation)
     {
         if (IsKeyPressed(KEY_SPACE))
         {
+            if (velocity)
+                velocity->setVelocity({this->moving_forward ? (float)5 : (float)-5, 0});
+
             animation->playAnimation("roll");
         }
 
@@ -100,13 +107,25 @@ void Player::handleInput()
 
         if (IsKeyDown(KEY_RIGHT))
         {
-            transform->setScale({1, 1});
+            this->moving_forward = true;
+            if (velocity)
+                velocity->setVelocity({2, 0});
+
+            if (transform)
+                transform->setScale({1, 1});
+
             animation->playAnimation("run");
         }
 
         if (IsKeyDown(KEY_LEFT))
         {
-            transform->setScale({-1, 1});
+            this->moving_forward = false;
+            if (velocity)
+                velocity->setVelocity({-2, 0});
+
+            if (transform)
+                transform->setScale({-1, 1});
+
             animation->playAnimation("run");
         }
 

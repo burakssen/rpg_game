@@ -19,6 +19,7 @@ public:
     void setPosition(Vector2 position);
     void setRotation(float rotation);
     void setScale(Vector2 scale);
+    void defaultTransform();
 
     Vector2 getPosition() const;
     float getRotation() const;
@@ -28,4 +29,8 @@ private:
     Vector2 position = {0, 0};
     float rotation = 0;
     Vector2 scale = {1, 1};
+
+    Vector2 old_position = {0, 0};
+    float old_rotation = 0;
+    Vector2 old_scale = {1, 1};
 };

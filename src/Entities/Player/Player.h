@@ -6,7 +6,7 @@
 
 #include "../../Components/TransformComponent/TransformComponent.h"
 #include "../../Components/AnimationComponent/AnimationComponent.h"
-
+#include "../../Components/VelocityComponent/VelocityComponent.h"
 #include "../../Log/Log.h"
 
 #include "../../TextureManager/TextureManager.h"
@@ -28,4 +28,6 @@ private:
 
     float health = 100;
     float maxHealth = 100;
+
+    bool moving_forward = false;
 };

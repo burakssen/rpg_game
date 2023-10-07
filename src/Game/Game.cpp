@@ -18,10 +18,11 @@ Game &Game::getInstance()
 
 void Game::init()
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    this->width = 800;
+    this->height = 450;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    InitWindow(width, height, "raylib [core] example - basic window");
 
     SetTargetFPS(60);
 
@@ -41,11 +42,29 @@ void Game::run()
 
 void Game::update()
 {
+    int current_width = GetScreenWidth();
+    int current_height = GetScreenHeight();
+
     this->handleInput();
     for (auto &entity : this->entities)
     {
+        if (current_width != this->width || current_height != this->height)
+        {
+            TransformComponent *transform = entity->getComponent<TransformComponent>();
+
+            if (current_width < this->width && current_height < this->height)
+                transform->defaultTransform();
+            else
+            {
+                transform->setScale(Vector2{transform->getScale().x * (float)current_width / this->width, transform->getScale().y * (float)current_height / this->height});
+                transform->setPosition(Vector2{(float)current_width * transform->getPosition().x / this->width, (float)current_height * transform->getPosition().y / this->height});
+            }
+        }
+
         entity->update();
     }
+    this->width = current_width;
+    this->height = current_height;
 }
 
 void Game::draw()

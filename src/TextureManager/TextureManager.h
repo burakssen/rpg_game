@@ -20,6 +20,7 @@ public:
 
     Texture2D *getTexture(std::string texture_name);
     void addTexture(std::string texture_name, Texture2D *texture);
+    bool hasTexture(std::string texture_name);
 
 private:
     std::map<std::string, Texture2D *> textures;
