@@ -37,10 +37,17 @@ void AnimationComponent::update()
                 }
             }
 
-            this->setSourceRec({static_cast<float>(this->current_frame * this->frame_width), 0.0f, static_cast<float>(this->getTexture().width) / this->number_of_frames * this->getParent()->getComponent<TransformComponent>()->getScale().x, static_cast<float>(this->getTexture().height) * this->getParent()->getComponent<TransformComponent>()->getScale().y});
-            this->setDestRec({static_cast<float>(this->getParent()->getComponent<TransformComponent>()->getPosition().x),
-                              static_cast<float>(this->getParent()->getComponent<TransformComponent>()->getPosition().y),
-                              static_cast<float>(this->frame_width), static_cast<float>(this->frame_height)});
+            if (this->getParent())
+            {
+                TransformComponent *transform = this->getParent()->getComponent<TransformComponent>();
+                if (transform)
+                {
+                    this->setSourceRec({static_cast<float>(this->current_frame * this->frame_width), 0.0f, static_cast<float>(this->getTexture().width) / this->number_of_frames * transform->getScale().x, static_cast<float>(this->getTexture().height) * transform->getScale().y});
+                    this->setDestRec({static_cast<float>(transform->getPosition().x),
+                                      static_cast<float>(transform->getPosition().y),
+                                      static_cast<float>(this->frame_width), static_cast<float>(this->frame_height)});
+                }
+            }
         }
     }
 }
