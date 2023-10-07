@@ -1,12 +1,20 @@
 # Define compiler and flags for C++
 CXX := g++
 CXXFLAGS := -Wall -Wextra -g -std=c++20
-LDFLAGS := -framework IOKit -framework Cocoa -framework OpenGL
+LDFLAGS := 
 SRCDIR := src
 OBJDIR := obj
 BINDIR := bin
 INCDIR := include
+UNAME_S := $(shell uname -s)
 LIBDIR := lib  # Add your library directory here
+ifeq ($(UNAME_S),Linux)
+	LIBDIR := lib/linux
+endif
+ifeq ($(UNAME_S),Darwin)
+	LIBDIR := lib/macos
+	LDFLAGS := -framework IOKit -framework Cocoa -framework OpenGL
+endif
 LIBS := raylib
 EXECUTABLENAME := rpg_game
 

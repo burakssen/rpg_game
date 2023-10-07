@@ -5,6 +5,8 @@
 
 #include "../Components/Component.h"
 
+#include <vector>
+
 class Component;
 
 class Entity
