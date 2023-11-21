@@ -1,5 +1,5 @@
 workspace "Raylib"
-    configurations { "Release"}
+    configurations { "Debug", "Release"}
 
 function platform_defines()
     defines{"PLATFORM_DESKTOP"}
@@ -87,7 +87,6 @@ end
 
 project "raylib"
     kind "StaticLib"
-
     platform_defines()
 
     location "obj/raylib"
@@ -97,6 +96,12 @@ project "raylib"
     filter "action:vs*"
         defines{"_WINSOCK_DEPRECATED_NO_WARNINGS", "_CRT_SECURE_NO_WARNINGS"}
         characterset ("MBCS")
+
+    filter "configurations:Debug"
+        optimize "On"
+
+    filter "configurations:Release"
+        optimize "On"
 
     filter{}
 
@@ -127,8 +132,8 @@ project "rpg_game"
     configurations { "Debug" }
     kind "ConsoleApp"
     language "C++"
-    targetdir "bin/%{cfg.system}"
-    cppdialect "C++20"
+    targetdir "bin/%{cfg.system}/%{cfg.buildcfg}"
+    cppdialect "C++17"
 
     includedirs {"src", "include"}
     files {"src/**.h", "src/**.cpp"}
@@ -146,6 +151,6 @@ project "rpg_game"
         defines{"_WINSOCK_DEPRECATED_NO_WARNINGS", "_CRT_SECURE_NO_WARNINGS"}
         characterset ("MBCS")
 
-
     filter{}
     link_raylib()
+

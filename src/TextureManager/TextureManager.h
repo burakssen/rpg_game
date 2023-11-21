@@ -6,6 +6,8 @@
 #include <map>
 #include <filesystem>
 
+#include "Log/Log.h"
+
 class TextureManager
 {
 private:

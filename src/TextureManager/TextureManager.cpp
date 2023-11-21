@@ -49,7 +49,10 @@ Texture2D *TextureManager::getTexture(std::string texture_name)
 
 void TextureManager::addTexture(std::string texture_name, Texture2D *texture)
 {
-    std::cout << "Adding texture: " << texture_name << std::endl;
+#ifdef DEBUG
+    Log::warn("Debug mode");
+#endif
+    Log::info("Adding texture: " + texture_name);
     this->textures[texture_name] = texture;
 }
 
