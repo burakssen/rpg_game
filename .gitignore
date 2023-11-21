@@ -3,3 +3,7 @@
 bin
 obj
 assets/tiles/Fences/.DS_Store
+include
+lib
+Makefile
+rpg_game.make
